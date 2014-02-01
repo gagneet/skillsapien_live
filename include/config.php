@@ -2,20 +2,21 @@
 	session_start();
     error_reporting (0); 
 /* Database Host Name */ 
-define('host', 'sapiendb1.db.8851222.hostedresource.com');
+ 
+  define('host','localhost');
 /* Database Username */ 
     
  //define('username','root');
-define('username', 'sapiendb1');
+define('username','portfolio');
   
  
 // define('password','');
-define('password', 'Sapien2012');
+define('password','port123#');
 /* Database and Session prefixes */ 
 define('DB_PREFIX', ''); ## Do not edit ! 
  
   
-define('database', 'sapiendb1');
+define('database','skillfg_db'); 
 define('WM_WEB_LINK', ''); ## WEB SITE LINK	
 define('WM_MEMBERS', 'members/'); ## members folder path
 define('WM_INCLIDE', 'include/'); ## include folder path
@@ -23,18 +24,18 @@ define('WM_CONTENT', 'contents/'); ## web content html and relatted dynamic work
 define('WM_CAPTCHA', 'captcha/'); ## web content html and relatted dynamic work folder path
 define('WM_CLASS', 'class/'); ## web class and relatted dynamic work folder path
 define('WM_IMAGES', 'images/'); ## web images folder path
-define('SITE_PATH', 'http://www.skillsapien.com/'); ## web content html and related dynamic work folder path
-define('SITE_NAME', 'Skillsapien.com'); ##SET SITE NAME
+define('SITE_PATH', 'http://182.50.141.145/applications/skillsepian_new/'); ## web content html and relatted dynamic work folder path
+define('SITE_NAME', 'SKILL SAPIEN'); ##SET SITE NAME
 
-define('SITE_ROOT', '/'); ##SET SITE ROOT
+define('SITE_ROOT', '/skillsepian_new/'); ##SET SITE ROOT
 
 define('SESSION_PREFIX', 'probid_');
 
 /*
 	SET EMAIL INFO
 */
-define('LOGIN_USER_EMAIL', 'victor@skillsapien.com');
-define('LOGIN_USER_SUBJECT', 'New User Registered');
+define('LOGIN_USER_EMAIL', 'rajesh@w3csolutions.com'); 
+define('LOGIN_USER_SUBJECT', 'User registered'); 
 
 
 define('ENABLE', 'enable'); ## set status 

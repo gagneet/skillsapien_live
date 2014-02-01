@@ -63,6 +63,7 @@ switch($_REQUEST['tab'])
             <select name="Currency" size="1" class="currency" id="Currency">
               <option selected="selected" value="">Currency</option>
               <?php
+			
 			$C_sql='SELECT `id`, `name` FROM `currency` WHERE 1 ORDER BY `currency`.`name` ASC';
 			$C_run=$db->query_silent($C_sql);
 			while($C_data=$db->fetch_array($C_run))

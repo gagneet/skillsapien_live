@@ -1,0 +1,7 @@
+﻿{
+  "homepage" : "http://www.google.com",
+  "homepage_is_newtabpage" : false,
+  "distribution" : {
+    "make_chrome_default_for_user" : true
+  }
+}
