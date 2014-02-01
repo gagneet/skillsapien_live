@@ -1,0 +1,58 @@
+.topic{
+    font-size: 13px; font-weight: bold;
+    font-family: arial; text-align: center; text-decoration: underline;
+}
+.curdate{
+    font-size: 12px; font-weight: bold;
+    background-color: rgb(250,253,111);
+    text-decoration: none;
+    font-family: arial; text-align: right;
+}
+.leavedays{
+    background-color: lightblue;    
+}
+.monthnames{
+    color: red; font-family: arial; text-align: center; font-size: 13px;
+}
+.daynames{
+    font-size: 11px; font-weight: bold; background-color: #000000; color: #fff; font-family: arial;
+}
+.tab{
+    border: 1px solid #888c8e;
+    height: 300px;
+}
+.search-background {
+	display: none;
+	font-size: 13px;
+	position: absolute;
+	padding-top: 190px;
+	padding-left: 450px;
+	opacity:0.5;filter: alpha(opacity=50) ;
+	text-decoration: none;
+	text-shadow: #fff 0px 0px 20px;
+}
+#calendar td{
+	text-align:right;
+}
+
+.noofavaliable{
+	background-color:#FFF;
+	height:50px;
+	text-decoration: none;
+}
+.calendermenu{
+	margin-left:20px;
+	width:200px;
+	cursor:pointer;
+}
+
+.daystyle{
+	    background-color: rgb(250,253,111);
+		width:auto;
+		text-align:center;
+		height: 60px;
+	    text-align: center;
+    	width: 90px;
+		font-size:12px;
+		font:"Times New Roman", Times, serif;
+}

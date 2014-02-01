@@ -1,0 +1,1 @@
+$('.success').fadeOut(3000);

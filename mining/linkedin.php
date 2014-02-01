@@ -1,0 +1,41 @@
+
+<html>
+<head>
+<title>Profile App Example</title>
+
+<script type="text/javascript" src="http://platform.linkedin.com/in.js">
+  api_key: b1mboiggn2qb
+  authorize: true
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.5b1.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/jquery-ui.min.js"></script>  
+
+<script type="text/javascript">
+
+function loadData() {
+IN.API.Profile("me")
+   .result(function(result) { 
+   //alert(result.values[0].id);
+      $("#profile").html('<script type="IN/FullMemberProfile" data-id="' + result.values[0].id + '"><script>');
+      IN.parse(document.getElementById("profile"))
+   })
+}
+
+</script>
+
+</head>
+<body class="yui3-skin-sam     yui-skin-sam">
+<div id="profile"></div>
+
+<script type="IN/Login" data-onAuth="loadData" data-ids="Hv3V1lv4SQ">
+<form action="post_linkein.php"> 
+<p>Your Name: <input type="text" name="name" value="<?js= firstName ?> <?js= lastName ?>" /></p>
+<p>Your Password: <input type="password" name="password" /></p>
+<input type="hidden" name="linkedin-id" value="<?js= id ?>" />
+<input type="submit" name="submit" value="Sign Up"/>
+</script>
+
+
+</body>
+</html>
