@@ -1,0 +1,54 @@
+<?php
+	if(isset($_POST['contact_form']))
+	{
+		$message="Hi Victor,".PHP_EOL;
+		$message.="We have had contact from the world.".PHP_EOL;
+		$message.="Name: " . $_POST['name'].PHP_EOL;
+		$message.="Email: " . $_POST['email'].PHP_EOL;
+		$headers = 'From: webmaster@skillsapien.com' . "\r\n";		
+		mail($to='victor.jiang@me.com', $subject='New SkillSapien Registered Interest', $message, $headers);
+		$message_to_user="Thank you for registering your interest.";
+	}	
+?>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Skillsapien Placeholder Site</title>
+<link href="style.css?v=1.0.3" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+<p><img src="Skillsapien New Logo.png" width="460" height="139" alt="Skillsapien Placeholder Image" id="skillsapien_logo"/></p>
+<p>Skillsapien.com&#8482; will be live soon!!</p>
+<p class="HeadingRow"><strong>You have skills in demand?  We will have the platform to maximize your market value, now and in the future.</strong></p>
+<p>
+Skillsapien.com is a site that matches recruiters with skilled professionals via the true market forces of demand and supply.</p>
+<p>
+Through us, you can bid on the availability of skilled professionals both now and in the future.</p>
+<p>Or you can sign up as a skilled candidate and put your skills up to the market to determine the best value possible.</p>
+<p>
+Either way, we aim to make the global skills market completely transparent, giving you full visibility on the true demand and supply of a given skill, at any point in time.</p>
+<br>
+<p>Please register your interest and we will keep you posted on any news and updates when we launch!</p>
+<?php
+if(isset($message_to_user))
+{
+	echo '<p class="success">'.$message_to_user.'</p>';
+}
+?>
+<form action="index.php" method="post" name="form2" class="Label" id="form2">
+    <div><label for="name">Your name</label> <input type="text" id="name" name="name"> <text-indent:360px> </div>
+    <div><label for="email">Your email address</label> <input type="text" id="email" name="email"><text-indent:360px></div>
+    <p>
+  		<input type="submit" id="Submit" value="Submit" name="contact_form" />
+  		<input type="reset" id="reset" value="Reset" />
+	</p>
+</form>
+<p>Many thanks,</p>
+<p>The Skillsapien Team</p>
+<p><a href="mailto:info@skillsapien.com">info@skillsapien.com</a></p>
+</body>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+<script src="script.js"></script>
+</html>

@@ -1,4 +1,4 @@
-<link href="./css/facebox.css" media="screen" rel="stylesheet" type="text/css" />
+<!--<link href="./css/facebox.css" media="screen" rel="stylesheet" type="text/css" />
 <script src="./js/facebox.js" type="text/javascript"></script>
 
 <script type="text/javascript" >
@@ -16,14 +16,13 @@ $(document).ready(function(){
 	 
 });
 </script>
-
+-->
 
 
 
 <?php
 
 // function for finding how many candidates are avaliable on given date 
-include 'init.php';
 include'function.php';
 
 //echo  noofcandidates();exit;
@@ -33,19 +32,6 @@ print'</pre>';*/
 	$getSkill=$_GET['skill'];
 	$getMonth=$_GET['month'];
 	$getYear=$_GET['year'];
-	if($s->is_set('CAND_ID')){
-		$candId= $s->value('CAND_ID');
-	}else{
-		$candId ='';
-	}
-	
-	if($s->is_set('USER_ID')){
-	$user_id =$s->value('USER_ID');
-}else{
-	$user_id = $s->value('CAND_ID');
-}
-	
-	
 // year calendar 
 if(isset($_GET['year']) && isset($_GET['month'])  && $_GET['month']=='All'){
 						
@@ -57,14 +43,36 @@ if(isset($_GET['year']) && isset($_GET['month'])  && $_GET['month']=='All'){
 					   $yearnext=$year+1;
 					// $month = date('m');
 					echo "<table cellspacing=10 border=0>";
-					echo "<tr><td  style='text-align:left;'><input type='button' onclick='privew(".$yearpre.")' style=".'"'." border:none; background-image:url('../it/images/pre.png'); height:25px; cursor:pointer; width:80px" .'"'."></td><td  style='text-align:center;font-size:14px; font-weight:bold; color:green;'> ".$year."</td><td style='text-align:right;'><input type='button' onclick='privew(".$yearnext.")' style=".'"'." border:none; background-image:url(../it/images/next.png); height:25px; width:80px; cursor:pointer;" .'"'."></td></tr>";
+					echo "<tr><td  style='text-align:left;'> 
+					
+					<input type='button' onclick='privew(".$yearpre.")'  style=".'"'." border:none; background-image:url('../it/images/pre.png'); height:25px; cursor:pointer; width:80px" .'"'."> 
+					
+					  </td>
+					
+					<td  style='text-align:center;font-size:14px; font-weight:bold; color:green;'> ".$year."</td>
+					
+					<td style='text-align:right;'><input type='button' onclick='privew(".$yearnext.")' style=".'"'." border:none; background-image:url(../it/images/next.png); height:25px; width:80px; cursor:pointer;" .'"'."></td></tr>";
+					
+					
 					for($ti=0;$ti<12;$ti++) {
 							  $month = $ti+1;
 							  if($ti%3==0) echo "<tr>";
 								echo "<td valign='top'>";
 							echo "<span class='monthnames'><b>".date( 'F', mktime(0, 0, 0, $month,1,0) )."</b></span>";
 									  echo "<table border=0 class='tab' width='300px;'>";
-											  echo "<tr class='daynames' height='20px;'><td width='50px;' >Sun</td><td width='50px;'>Mon</td><td width='50px;'>Tue</td><td width='50px;'>Wed</td><td width='50px;'>Thu</td><td width='50px;'>Fri</td><td width='50px;'>Sat</td></tr>";
+									  
+									  
+											  echo "<tr class='daynames' height='20px;'>											  
+											  <td width='50px;' style='text-align:center'>Sun</td>
+											  <td width='50px;' style='text-align:center'>Mon</td>
+											  <td width='50px;' style='text-align:center'>Tue</td>
+											  <td width='50px;' style='text-align:center'>Wed</td>
+											  <td width='50px;' style='text-align:center'>Thu</td>
+											  <td width='50px;' style='text-align:center'>Fri</td>
+											  <td width='50px;' style='text-align:center'>Sat</td>
+											  </tr>";
+											  
+											  
 														$timestamp = mktime(0,0,0,$month,1,$year);
 														$maxday = date("t",$timestamp); 
 														$thismonth = getdate ($timestamp);
@@ -78,9 +86,9 @@ if(isset($_GET['year']) && isset($_GET['month'])  && $_GET['month']=='All'){
 															   else{
 											  $dateargument =$year."-".$month."-".($i - $startday + 1);
 											  
-											   $candidatescount =canditUnavaliableTime($dateargument, $user_id);
-											  /*//$candidatescount =30;
-												if($candidatescount >=100){
+											  $candidatescount =noofcandidates($dateargument, $getSkill);
+											  //$candidatescount =30;
+												/*if($candidatescount >=100){
 													// light blue color 
 													$bgcolor='#6699FF';
 												}elseif($candidatescount >=50 && $candidatescount <100){
@@ -97,23 +105,27 @@ if(isset($_GET['year']) && isset($_GET['month'])  && $_GET['month']=='All'){
 													$bgcolor ='red';
 												}*/
 												
-											 $bgcolor =candidateBgColor($candidatescount);
+												if(isset($_GET['defaultColor']) && $_GET['defaultColor'] =='white'){
+												$bgcolor ='white';
+												}else{
+												$bgcolor =recruiterBgColor($candidatescount);
+												}
 							
 											  
 											  
 											  if($i - $startday + 1 == date('d') && date( 'F', mktime(0, 0, 0, $month,1,0) ) == date('F') && $year == date('Y')){
 												echo "<td align='center' valign='top' class='curdate'>";
-												echo '<a  href="today_avaliable.php?date='.$dateargument.'&skill='.$getSkill.'&canditIt='.$candId.'" rel="facebox"  style="text-decoration:none;">';
+												echo '<a  href="allcandidates.php?date='.$dateargument.'&skill='.$getSkill.'" rel="facebox"  style="text-decoration:none;">';
 												echo "<div  class='noofavaliable' style='background-color:".$bgcolor."'>";
-												echo ($i - $startday + 1);						
+												echo "<font style='color:black;'>".($i - $startday + 1)."</font>";						
 												echo "</div></a></td>\n";
 												//echo '</a>';
 												}    
 											  else{
 												echo "<td align='center' valign='top' $style >";
-												echo '<a  href="today_avaliable.php?date='.$dateargument.'&skill='.$getSkill.'&canditIt='.$candId.'" rel="facebox"  style="text-decoration:none;">';
+												echo '<a  href="allcandidates.php?date='.$dateargument.'&skill='.$getSkill.'" rel="facebox"  style="text-decoration:none;">';
 												echo "<div  class='noofavaliable' style='background-color:".$bgcolor."'>";
-												echo ($i - $startday + 1);								
+												echo "<font style='color:black;'>".($i - $startday + 1)."</font>";								
 												echo "</div></a></td>\n";
 												//echo '</a>';
 											  }
@@ -165,15 +177,27 @@ elseif(isset($_GET['month'])){
 			//$month==12;
 		}
 
-	echo "<table cellspacing=0 border=0>";
-	echo "<tr><td align='right' width='50px;'><input type='button' onclick='monthprev(".$year.",".$premonth.",0)' style=".'"'." border:none; background-image:url('../it/images/pre.png'); height:25px; cursor:pointer; width:80px" .'"'."></td><td  style='text-align:center;font-size: 15px;font-weight: bold;'> ".date( 'F', mktime(0, 0, 0, $month,1,$year) )."-".$year."</td><td style='text-align:right;'><input type='button' onclick='monthprev(".$year.",".$nextmonth.",1)' style=".'"'." border:none; background-image:url(../it/images/next.png); height:25px; width:80px; cursor:pointer;" .'"'."></td></tr>";
+	echo "<table cellspacing=0 border=0 align='centar' style='margin-left:50px; margin-top:20px;' >";
+	echo "<tr><td align='right' width='50px;'><input type='button' onclick='monthprev(".$year.",".$premonth.",0)' style=".'"'." border:none; background-image:url('../it/images/pre.png'); height:25px; cursor:pointer; width:80px" .'"'."></td><td  style='text-align:center;font-size: 15px;font-weight: bold;'> ".date( 'F', mktime(0, 0, 0, $month,1,$year) )."-".$year."</td><td style='text-align:right;'><input type='button' onclick='monthprev(".$year.",".$nextmonth.",1)' style=".'"'." border:none; background-image:url('../it/images/next.png'); height:25px; cursor:pointer; width:80px" .'"'."></td></tr>";
 
  
          echo "<tr>";
             echo "<td valign='center' colspan='3'>";
 	    echo "<span class='monthnames'><b>".date( 'F', mktime(0, 0, 0, $month,1,0) )."</b></span>";
                   echo "<table border=0 class='tab' width='350px;'>";
-                   echo "<tr class='daynames' height='20px;'><td width='50px;' >Sun</td><td width='50px;'>Mon</td><td width='50px;'>Tue</td><td width='50px;'>Wed</td><td width='50px;'>Thu</td><td width='50px;'>Fri</td><td width='50px;'>Sat</td></tr>";
+				  
+                   echo "<tr class='daynames' height='20px;' style='text-align:center;'>
+				   
+				   <td width='50px;' style='text-align:center;' >Sun</td>
+				   <td width='50px;' style='text-align:center;'>Mon</td>
+				   <td width='50px;' style='text-align:center;'>Tue</td>
+				   <td width='50px;' style='text-align:center;'>Wed</td>
+				   <td width='50px;' style='text-align:center;'>Thu</td>
+				   <td width='50px;' style='text-align:center;'>Fri</td>
+				   <td width='50px;' style='text-align:center;'>Sat</td>
+				   
+				   
+				   </tr>";
                                     $timestamp = mktime(0,0,0,$month,1,$year);
                                     $maxday = date("t",$timestamp); 
                                     $thismonth = getdate ($timestamp);
@@ -187,7 +211,7 @@ elseif(isset($_GET['month'])){
 	                                       else{
 						  $dateargument =$year."-".$month."-".($i - $startday + 1);
 						  
-						  $candidatescount =canditUnavaliableTime($dateargument, $user_id);
+						  $candidatescount =noofcandidates($dateargument, $getSkill);
 							/*if($candidatescount >=100){
 								// light blue color 
 								$bgcolor='#6699FF';
@@ -205,15 +229,15 @@ elseif(isset($_GET['month'])){
 								$bgcolor ='red';
 							}*/
 							
-							$bgcolor =candidateBgColor($candidatescount);
+								$bgcolor =recruiterBgColor($candidatescount);
 						  
 						  
 						  
 						  if($i - $startday + 1 == date('d') && date( 'F', mktime(0, 0, 0, $month,1,0) ) == date('F') && $year == date('Y')){
 						    echo "<td align='center' valign='top' class='curdate'>";
-							echo '<a href="today_avaliable.php?date='.$dateargument.'&skill='.$getSkill.'&canditIt='.$candId.'" rel="facebox" style="text-decoration:none;">';
+							echo '<span onclick="canditList('."'".$dateargument."'".')"  style="text-decoration:none;cursor:pointer;">';
 							echo "<div  class='noofavaliable' style='background-color:".$bgcolor."'>";							
-							echo ($i - $startday + 1);
+							echo "<font style='color:black;'>".($i - $startday + 1)."</font>";
 							
 							
 							//echo noofcandidates($dateargument); 
@@ -222,9 +246,9 @@ elseif(isset($_GET['month'])){
 						  }
 						  else{
 						    echo "<td align='center' valign='top' $style>";
-							echo '<a href="today_avaliable.php?date='.$dateargument.'&skill='.$getSkill.'&canditIt='.$candId.'" rel="facebox" style="text-decoration:none;">';
+							echo '<span onclick="canditList('."'".$dateargument."'".')"  style="text-decoration:none;cursor:pointer;">';
 							echo "<div  class='noofavaliable' style='background-color:".$bgcolor."'>";
-							echo ($i - $startday + 1);
+							echo "<font style='color:black;'>".($i - $startday + 1)."</font>";
 							//echo noofcandidates($dateargument); 
 							echo "</div></a></td>\n";
 							//echo '</a>';
@@ -254,13 +278,18 @@ elseif(isset($_GET['day'])){
 	
 	//echo date('Y-m-j', $day);exit;
 	echo "<table cellspacing=10 border=0>";
-	echo "<tr><td align='right'><input type='button' onclick='dayprev(".$preday.")' style=".'"'." border:none; background-image:url('../it/images/pre.png'); height:25px; cursor:pointer; width:80px" .'"'."></td><td  style='text-align:center;font-size: 15px;font-weight: bold;'> ".date('j M Y', $day)."</td><td style='text-align:left;'><input type='button' onclick='dayprev(".$nextday.")'  style=".'"'." border:none; background-image:url(../it/images/next.png); height:25px; width:80px; cursor:pointer;" .'"'."></td></tr>";
+	echo "<tr><td align='right'><input type='button' onclick='dayprev(".$preday.")'  style=".'"'." border:none; background-image:url('../it/images/pre.png'); height:25px; cursor:pointer; width:80px" .'"'."></td><td  style='text-align:center;font-size: 15px;font-weight: bold;'> ".date('j M Y', $day)."</td><td style='text-align:left;'><input type='button' onclick='dayprev(".$nextday.")'  style=".'"'." border:none; background-image:url('../it/images/next.png'); height:25px; cursor:pointer; width:80px" .'"'."></td></tr>";
 echo "</table>";
+
+
+
+
+
+	
 	
 echo "<div class='daystyle'>";	
-		echo '<a href="today_avaliable.php?date='.$dateargument.'&skill='.$getSkill.'&canditIt='.$candId.'" rel="facebox" style="text-decoration:none;">';
-
-	$candidatescount =canditUnavaliableTime($dateargument, $user_id);
+	echo '<a href="allcandidates.php?date='.$dateargument.'&skill='.$getSkill.'" rel="facebox" style="text-decoration:none;">';
+	$candidatescount =noofcandidates($dateargument, $getSkill);
 	/*if($candidatescount >=100){
 		// light blue color 
 		$bgcolor='#6699FF';
@@ -277,14 +306,13 @@ echo "<div class='daystyle'>";
 		// red color
 		$bgcolor ='red';
 	}*/
-	
-	$bgcolor =candidateBgColor($candidatescount);
+		$bgcolor =recruiterBgColor($candidatescount);
 	
 	
 	
 	echo "<div class='daynames'>";
 			echo "<b>".date("l", $day)."</b>";
-			echo '</div><div style="background-color:'.$bgcolor.'; width: 90px; height: 48px; font-size: 35px; margin-bottom:20px;">';
+			echo '</div><div style="background-color:'.$bgcolor.'; width: 90px; height: 48px; font-size: 35px;">';
 			echo $today = date('j', $day);
 			
 			//echo '<div style="background-color:yellow;text-align:center;">';
@@ -293,9 +321,13 @@ echo "<div class='daystyle'>";
 				//echo "</div>";
 			
 	echo "</div>";
-echo '</a>';
+			echo '</a>';
 echo "</div>";
+
 }
+
+
+
 
 // calendar for a week 
 elseif(isset($_GET['week'])){
@@ -328,16 +360,14 @@ elseif(isset($_GET['week'])){
 
 	
 	echo "<table cellspacing=10 border=0>";
-echo "<tr>
-<td align='right'><input type='button' onclick='weekprev(".$preweek.")'  style=".'"'." border:none; background-image:url('../it/images/pre.png'); height:25px; cursor:pointer; width:80px" .'"'."></td><td  style='text-align:center;font-size: 15px;font-weight: bold;'> ".date('M Y', $day)."</td>
-<td style='text-align:left;'><input type='button' onclick='weekprev(".$nextweek.")'  style=".'"'." border:none; background-image:url(../it/images/next.png); height:25px; width:80px; cursor:pointer;" .'"'."></td>
-</tr>";
+echo "<tr><td align='right'><input type='button' onclick='weekprev(".$preweek.")'  style=".'"'." border:none; background-image:url('../it/images/pre.png'); height:25px; cursor:pointer; width:80px" .'"'."></td><td  style='text-align:center;font-size: 15px;font-weight: bold;'> ".date('M Y', $day)."</td><td style='text-align:left;'><input type='button' onclick='weekprev(".$nextweek.")'  style=".'"'." border:none; background-image:url('../it/images/next.png'); height:25px; cursor:pointer; width:80px" .'"'."></td></tr>";
 echo "</table>";
+
 $weekarray= array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
 echo '<table>
 			<tr class="daynames">';
 			for($i=0; $i<7; $i++){
-				echo '<td width="50px" >';
+				echo '<td width="50px" style="text-align:center" >';
 				echo $weekarray[$i];
 				echo "</td>";
 			}
@@ -349,7 +379,7 @@ echo '<table>
 					$nextmonthvalue=1;
 				}
 				$dateargument =date('Y-m-', $day).$todayvalue;
-				$candidatescount =canditUnavaliableTime($dateargument, $user_id);
+				$candidatescount =noofcandidates($dateargument, $getSkill);
 				
 				/*if($candidatescount >=100){
 					// light blue color 
@@ -367,50 +397,40 @@ echo '<table>
 					// red color
 					$bgcolor ='red';
 				}*/
-				
-				$bgcolor =candidateBgColor($candidatescount);
+					$bgcolor =recruiterBgColor($candidatescount);
 				
 				if($todayvalue == date('j', $day)){
 					echo '<td width="50px" height="50px" style="font-size: 20px; background-color: yellow;" valign="top">';
-					echo '<a href="today_avaliable.php?date='.$dateargument.'&canditIt='.$candId.'" rel="facebox" style="text-decoration:none;">';
+					echo '<a href="allcandidates.php?date='.$dateargument.'" rel="facebox" style="text-decoration:none;">';
 					echo '<div style="position: absolute;background-color:'.$bgcolor.';text-align:center;width: 50px;height: 50px;">';
 				}
 				else{
-					
 					echo '<td width="50px" height="50px" style="font-size: 20px; background-color: lightblue;" valign="top">';
-					if($todayvalue  <=0){
-						$bgcolor ='yellow';
-					}
-					if($todayvalue > 0){
-						
-					echo '<a href="today_avaliable.php?date='.$dateargument.'&skill='.$getSkill.'&canditIt='.$candId.'" rel="facebox" style="text-decoration:none;">';
-						}
+							if($todayvalue > 0){
+					echo '<a href="allcandidates.php?date='.$dateargument.'&skill='.$getSkill.'" rel="facebox" style="text-decoration:none;">';
+							}
 					echo '<div style="position: absolute;background-color:'.$bgcolor.';text-align:center;width: 50px;height: 50px;">';
 				}
 				
 				//echo '<div style="margin-top:20px;position: absolute;background-color:yellow;text-align:center;width: 50px;">';
-				//echo '<a href="today_avaliable.php?date='.$dateargument.'" rel="facebox" style="text-decoration:none;">';
+				//echo '<a href="allcandidates.php?date='.$dateargument.'" rel="facebox" style="text-decoration:none;">';
 				
 				//echo noofcandidates($dateargument); echo "</div>";
 				//echo '</a>';
 				if($todayvalue <= $maxday ){
-					
-					//echo date('j', $day);
-				if($todayvalue > 0){
-				echo $todayvalue;
+					if($todayvalue > 0){
+						echo $todayvalue;
 					}
 				$todayvalue++;				
 				}else{
-				
 				echo $nextmonthvalue;
-				
 				 $nextmonthvalue =$nextmonthvalue + 1;
 				$todayvalue++;
 				}
 				echo "</div>";
-		if($todayvalue > 0){
-				echo '</a>';
-		}
+					if($todayvalue > 0){
+							echo '</a>';
+					}
 				echo "</td>";
 				
 			}
@@ -421,45 +441,62 @@ echo '</table>';
 
 
 
-if(isset($_GET['canditDeletId']) && $_GET['date'] !=''){
-	
-	//echo 'dfjkdjsfkldsjfkld';
-	//exit;
-	$user_id =$s->value('USER_ID');
-	
-	if(isset($_GET['canditDeletId']) !=''){
-	 	$sqlDelete ="DELETE FROM calendar WHERE id='".$_GET['canditDeletId']."'";
-		mysql_query($sqlDelete);
+if(isset($_GET['canditList']) && $_GET['canditList'] !=''){
+	?>
+    <script type="text/javascript">
+jQuery().ready(function(){	
+	// applying the settings
+	jQuery('#theMenu').Accordion({
+		active: 'h3.selected',
+		header: 'h3.head',
+		alwaysOpen: false,
+		animated: true,
+		showSpeed: 400,
+		hideSpeed: 800
+	});
+});	
+</script>
+    <?php
+	 $date = $_GET['canditList'];
+	 echo "<font style='font-size:12px; font-weight:bold;'><center>Selected Date: ".$date."</center></font>";
+	 $canditResult = hourCanditList($date);
+	echo '<ul id="theMenu">';
+	while($row =mysql_fetch_assoc($canditResult)){
+		//print_r($row);exit;
+	echo '<li>
+				<h3 class="head"><a href="javascript:;" onclick="getAvaliableTime('.$row['id'].','."'".$date."'".')">'.$row['name'].'</a></h3>
+				<ul>
+					<li><font style="color:black;font-weight:100;">Skill Keywords: </font>'.$row['skills_profile'].'</li>
+					<li><font style="color:black;">Profile Summary: </font>'.$row['profile_summary'].'</li>
+					<li><font style="color:black;">Rates: </font>Lt Amount: '.$row['cname'].' '.$row['lt_amount'].'    Gt Amount '.$row['cname'].' '.$row['gt_amount'].'
+		   </li>
+					<li><br><a href="bid.php?jobid='.$row['id'].'&jpid="><input type="button" value="" id="bidlink" ></a></li>
+				</ul>
+			</li>';
+	 echo '';		
 	}
-	
-	  $sql ="select * from calendar where user_id='".$user_id."' AND date='".$_GET['date']."'";
-	 $queryResult = mysql_query($sql);
-
-if(mysql_num_rows($queryResult) ==0){
-	
-	echo '<table align="center" id="avaliableTime" name="avaliableTime" border="0" cellpadding="2" width="500px" cellspacing="10" style="background-color:#BADACE; font-size:13px;">';
-	echo '<caption><h3 style="color:#063;margin-bottom:10px;">Unavaliable Time</h3></caption>';
-		echo '<tr> <td align="center" colspan="5">No records for unavaliable time</td></tr>';
-		
-}else{
-echo '<table align="center" id="avaliableTime" name="avaliableTime" border="0" cellpadding="2" width="500px" cellspacing="10" style="background-color:#BADACE; font-size:13px;">';
-echo '<caption><h3 style="color:#063;margin-bottom:10px;">Unavaliable Time</h3></caption>';
-		echo '<tr> <td align="center"> DATE</td><td align="center">From</td><td align="center">To</td><td align="center">Delete</td>';
-while ($row =mysql_fetch_assoc($queryResult)){
-						echo '<tr align="center">
-									<td>'.$row['date'].'</td>
-									<td>'.$row['from_time'].'</td>
-									<td>'.$row['to_time'].'</td>
-									<td><a onclick="deleteC('.$row['id'].')" style="cursor:pointer;">Delete</a></td>
-								</tr>
-						';	
-						}
-}
-	 
-	
+    echo '</ul>';        
 }
 
-
+if(isset($_GET['canditId']) && $_GET['canditId'] !=''){
+	$cId 	= $_GET['canditId'];
+	$date 	= $_GET['date'];
+	
+	$unavaliableResult =unavaliabletime($cId, $date);
+	//print_r($unavaliableResult);
+	  $getCnt = count($unavaliableResult);
+					if($getCnt == 0 && empty($unavaliableResult)){
+							$tvalue= " NA ";
+							}else{
+								$tvalue ='';
+								foreach($unavaliableResult as $val){
+									$tvalue .= "<br><br><span >".$val['from_time']." to ".$val['to_time']."</span>";
+								}
+								
+							}
+	echo "<br><br><b>Unavaliable time: </b>".$tvalue;
+	
+}
 
 
 

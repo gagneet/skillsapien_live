@@ -28,50 +28,41 @@ if($allcandidates[0] ==0){
 	
 	echo "<center><font style='font-size: 15px;font-weight: bold; color:#21610B;'>".$dateargument." Avaliable Candidates list</font></center><br>";
 foreach($allcandidates as $row){
-
-	$unavaliable=unavaliabletime($row['id'], $dateargument);
-					if($unavaliable ==0){
+	
+			$unavaliable=unavaliabletime($row['id'], $dateargument);
+			//print'<pre>';print_r($unavaliable);
+	  $getCnt = count($unavaliable);
+					if($getCnt == 0 && empty($unavaliable)){
 							$tvalue= " NA ";
 							}else{
-								$tvalue= $unavaliable['from_time']."to ".$unavaliable['to_time'];
+								$tvalue ='';
+								foreach($unavaliable as $val){
+									$tvalue .= "<br><span >".$val['from_time']." to ".$val['to_time']."</span>";
+								}
+								
 							}
-	
-			if($row['photo'] ==''){
+					
+				if($row['photo'] ==''){
 					$imgName ="defaultProfileimg.png";
 				}else{
 					$imgName =$row['photo'];
 				}
-	
+	//echo $row['id'];
 					$cdetails.='
 					<div class="popuprow">
 								<img src="./profile_img/'.$imgName.'" height="75px;" width="85px;"   style="float:left; margin-right:10px;"/>
-								<div >
+								<div style="margin-left:95px;">
 									<b>Title:</b> '.$row['skills_profile'].'<br>				
 									<b>Skills:</b> '.displayString($row['profile_summary'], 20).'<br>	
 									<b>Unavaliable time: </b> '.$tvalue.'						
 									<br>		
-									<b>For full calendar <a href="">Click here</a> </b>					
-									<br>		
+									<b>For full calendar <a href="calendar_c.php?canditId='.$row['id'].'">Click here</a> </b>		
+									<br>									
 									<a href="bid.php?jobid='.$row['id'].'&jpid='.$rId.'"><input type="button" value="" id="bidlink" ></a>
 									</div>
 									</div>';
-
-
-
-
-
-
-
-			/*$cdetails.='<div class="popuprow">
-						<img src="../profile_img/'.$row['photo'].'" height="75px;" width="85px;"   style="float:left; margin-right:10px;"/>
-						<div >
-							<b>Title:</b> '.$row['skills_profile'].'<br>				
-							<b>Skills:</b> '.displayString($row['profile_summary'], 20).'<br>				
-							<a href=""><input type="button" value="" id="bidlink" ></a>
-							</div>
-							</div>';*/
-			
-			}
+					//echo $cdetails;
+					}
 			echo $cdetails;
 }
 ?>

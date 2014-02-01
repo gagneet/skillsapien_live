@@ -7,11 +7,11 @@
 /* Database Username */ 
     
  //define('username','root');
-define('username','pmuser');
+define('username','ptluser');
   
  
 // define('password','');
-define('password','promedik');
+define('password','sho2thahN8jeiche');
 /* Database and Session prefixes */ 
 define('DB_PREFIX', ''); ## Do not edit ! 
  

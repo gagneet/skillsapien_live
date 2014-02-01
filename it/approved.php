@@ -18,6 +18,5 @@ header("location:job_details.php?jid=$jobid");
 </head>
 
 <body>
-
 </body>
 </html>

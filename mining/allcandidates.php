@@ -15,16 +15,16 @@
 	cursor:pointer;
 }
 .paginations_class_current {
-	border: 1px solid  #D78D57;	
+	border: 1px solid #4b8aea;
 	padding:1px 4px 1px 5px;
 	position:relative;
 	margin-left:5px;
 	font-family:Arial, Helvetica, sans-serif;
 	font-size:11px;
 	font-weight:bolder;
-	color:#8e3c00;
+	color:#387fea;
 	text-decoration:none;	
-	background-color:#F2E2C4;
+	background-color:#e7f1fa;
 	top:0px;
 }
 
@@ -40,7 +40,7 @@
 	font-family:Arial, Helvetica, sans-serif;
 	font-size:11px;
 	font-weight:bolder;
-	color:#8e3c00;
+	color:#387fea;
 
 }
 .popuprow
@@ -52,10 +52,10 @@
 	font-size:13px;
 	color:#333;
 	line-height:20px;
-	border:1px solid #ffc000;
+	border:1px solid #AFC4C9;
 	margin-bottom:10px;
 	margin-right:20px;
-	background-color:#ffdca4;
+	background-color:#D5F4F3;
 	margin:0 auto;
 	
 	
@@ -141,10 +141,16 @@ if($allcandidates[0] ==0){
 foreach($allcandidates as $row){
 	
 			$unavaliable=unavaliabletime($row['id'], $dateargument);
-					if($unavaliable ==0){
+			//print'<pre>';print_r($unavaliable);
+	  $getCnt = count($unavaliable);
+					if($getCnt == 0 && empty($unavaliable)){
 							$tvalue= " NA ";
 							}else{
-								$tvalue= $unavaliable['from_time']."to ".$unavaliable['to_time'];
+								$tvalue ='';
+								foreach($unavaliable as $val){
+									$tvalue .= "<br><span >".$val['from_time']." to ".$val['to_time']."</span>";
+								}
+								
 							}
 					
 				if($row['photo'] ==''){
@@ -156,12 +162,14 @@ foreach($allcandidates as $row){
 					$cdetails.='
 					<div class="popuprow">
 								<img src="./profile_img/'.$imgName.'" height="75px;" width="85px;"   style="float:left; margin-right:10px;"/>
-								<div >
+								<div style="margin-left:95px;">
 									<b>Title:</b> '.$row['skills_profile'].'<br>				
 									<b>Skills:</b> '.displayString($row['profile_summary'], 20).'<br>	
 									<b>Unavaliable time: </b> '.$tvalue.'						
 									<br>		
-									<b>For full calendar <a href="calendar_c.php?canditId='.$row['id'].'">Click here</a> </b>		
+									<b>For full calendar <a href="calendar_c.php?canditId='.$row['id'].'">Click here</a> </b>
+									<br>									
+									<b>view full profile  <a href="cviewprofile.php?canditId='.$row['id'].'">  Click here</a></b>	
 									<br>									
 									<a href="bid.php?jobid='.$row['id'].'&jpid='.$rId.'"><input type="button" value="" id="bidlink" ></a>
 									</div>
@@ -185,7 +193,7 @@ $rowslimit =10;
 					$startPage = 1;
 				}
 				
-				$count =noofcandidates($dateargument , $getSkill);
+					$count =noofcandidates($dateargument , $getSkill);
 					$totalPage = $count/$rowslimit; 
 					$totalPageNo = round($totalPage);
 					if($totalPage  > $totalPageNo){

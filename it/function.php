@@ -22,7 +22,7 @@ function noofcandidates($dateargument, $getSkill=''){
 			if($i ==0){
 				$serchCondition.=" (  skills_profiles.skill_keywords LIKE '%".$getSkillarray[$i]."%')";	
 			}else{
-				$serchCondition.="OR (  skills_profiles.skill_keywords LIKE '%".$getSkillarray[$i]."%')";
+				$serchCondition.="AND (  skills_profiles.skill_keywords LIKE '%".$getSkillarray[$i]."%')";
 				}
 		}
 		$serchCondition.=" ))";
@@ -121,18 +121,20 @@ function displayString($str,$len)
 
 function unavaliabletime($id, $date){
 //	echo $id;exit;
-	//echo  $sql="select * from calendar where user_id='".$id."' AND date='".$date."'";
-	$date= mysql_query($sql);
-	$rowCount =mysql_num_rows($data);
-	if($rowCount ==0){
+	  $sql="select * from calendar where user_id='".$id."' AND date='".$date."'";
+	$data= mysql_query($sql);
+	   $rowCount =mysql_num_rows($data);
+	/*if($rowCount ==0){
 		return 0;
-	}else{
+	}else{*/
 		$resultarray =array();
-		while($row=mysql_fetch_assoc($date)){
+		while($row=mysql_fetch_assoc($data)){
+		//	print_r($row);
+			
 						$resultarray[]=$row;
 		}
 		return $resultarray;
-	}
+	/*}*/
 	
 }
 
@@ -163,61 +165,91 @@ function canditUnavaliableTime($dateValue, $cId){
 	
 function recruiterBgColor($candidatescount){
 	
-	if($candidatescount >=100){
-		// light blue color 
-			$bgcolor='#6699FF';
-			}elseif($candidatescount >=50 && $candidatescount <100){
-				// green color
-				$bgcolor='#00CC33';		
-			}elseif($candidatescount >=20 && $candidatescount <50){
-				// yellow color
-					$bgcolor ='#FFFF00';
-				}elseif($candidatescount >=10 && $candidatescount <20){
-				// orange color
-				$bgcolor ='#FF9966';
-				}elseif($candidatescount <10 ){
-				// red color
-				$bgcolor ='red';
-		}
+	 $sql =" select * from color_values where user_type ='R'";
+	$data = mysql_query($sql);
+	$color =array();
+	while($row =mysql_fetch_assoc($data)){
+		$color[$row['color_name'].'_minvalue']=$row['color_minvalue'];
+		$color[$row['color_name'].'_maxvalue']=$row['color_maxvaue'];
+		$color[$row['color_name'].'_colorcode'] =$row['color_code'];
 		
+	}
+	
+//echo 	print_r($color);exit;
+	if($candidatescount >=$color['blue_minvalue']){
+		// light blue color 
+			//$bgcolor='#50A0FF';
+			$bgcolor=$color['blue_colorcode'];
+			}elseif($candidatescount >=$color['green_minvalue'] && $candidatescount <$color['green_maxvalue']){
+				// green color
+				//$bgcolor='#66FF55';		
+				 $bgcolor=$color['green_colorcode'];	
+			}elseif($candidatescount >=$color['yellow_minvalue'] && $candidatescount <$color['yellow_maxvalue']){
+				// yellow color
+					//$bgcolor ='#FFF655';
+					$bgcolor =$color['yellow_colorcode'];
+				}elseif($candidatescount >=$color['orange_minvalue'] && $candidatescount <$color['orange_maxvalue']){
+				// orange color
+				//$bgcolor ='#FFA733';
+				$bgcolor =$color['orange_colorcode'];
+				}elseif($candidatescount <$color['red_maxvalue'] ){
+				// red color
+				//$bgcolor ='#FF5757';
+				$bgcolor =$color['red_colorcode'];
+		}
 		return $bgcolor;
 }
 	
 
 function candidateBgColor($candidatescount){
 	
-	/*if($candidatescount >=100){
-		// light blue color 
-			$bgcolor='#6699FF';
-			}elseif($candidatescount >=50 && $candidatescount <100){
-				// green color
-				$bgcolor='#00CC33';		
-			}elseif($candidatescount >=20 && $candidatescount <50){
-				// yellow color
-					$bgcolor ='#FFFF00';
-				}elseif($candidatescount >=10 && $candidatescount <20){
-				// orange color
-				$bgcolor ='#FF9966';
-				}elseif($candidatescount <10 ){
-				// red color
-				$bgcolor ='red';
-		}*/
+	 $sql =" select * from color_values where user_type ='C'";
+	$data = mysql_query($sql);
+	$color =array();
+	while($row =mysql_fetch_assoc($data)){
 		
+		$color[$row['color_name'].'_colorcode'] =$row['color_code'];
+		
+	}
+	
 		if($candidatescount ==0){
 			// red color
-				$bgcolor ='red';			
+				//$bgcolor ='#FF5757';		
+				$bgcolor =$color['red_colorcode'];	
 		}elseif($candidatescount ==1){
 			// orange color
-				$bgcolor ='#FF6600';			
+				//$bgcolor ='#FFA733';
+				$bgcolor =$color['orange_colorcode'];			
 		}elseif($candidatescount ==2){
 			// green color
-				$bgcolor='#00CC33';		
+				//$bgcolor='#66FF55';	
+				$bgcolor=$color['green_colorcode'];	
 		}
 		
 		return $bgcolor;
 	
 }
 
+function hourCanditList($dateargument){
+			
+ 	   $sql ="SELECT user_login_details.id, user_login_details.name,  user_login_details.type, user_login_details.status,
+			 skills_profiles.profile_summary,  skills_profiles.skills_profile,
+			profiles.photo, profiles.city, rates.lt_amount, rates.gt_amount, countries.countries_name, rates.lt_amount, rates.gt_amount,  currency.name as cname
+			FROM user_login_details 
+			LEFT JOIN calendar ON ( user_login_details.id = calendar.user_id AND calendar.date !='".$dateargument."' )
+			RIGHT JOIN skills_profiles ON ( user_login_details.id = skills_profiles.user_id)
+			RIGHT JOIN profiles ON (user_login_details.id =profiles.user_id )
+			LEFT JOIN rates ON ( user_login_details.id =rates.user_id )
+			LEFT JOIN countries ON (skills_profiles.country = countries.countries_id)
+			LEFT JOIN currency ON (currency.id = rates.lt_currency) 
+			WHERE user_login_details.type = 'C'
+			AND user_login_details.status = 'enable' 
+			AND user_login_details.vertical_id='".VERTICAL_ID."' 
+			 GROUP BY user_login_details.id"; 
+	
+	 $sqlResult =mysql_query($sql);
+	 return $sqlResult;
+}
 
 
 ?>

@@ -50,12 +50,10 @@
   top:5px;
   right:5px;
   padding:2px;
- 
+  background:#fff;
 }
 #facebox .close img{
   opacity:0.3;
-  margin-top:-7px;
-  margin-right:-6px;
 }
 #facebox .close:hover img{
   opacity:1.0;

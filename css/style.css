@@ -257,6 +257,7 @@ menu li a:hover
 	height:auto;
 	float:left;
 	border-right:1px solid #CCC;
+	z-index:-1;
 	
 }
 
@@ -283,6 +284,7 @@ menu li a:hover
 	float:left;
 	width:100%;
 	height:177px;
+	
 	
 }
 
@@ -490,4 +492,36 @@ menu li a:hover
 
 img{
 	border:0px;
+}
+
+
+
+.popuprow
+{
+	width:49%;
+	float:left;
+	height:auto;
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:13px;
+	color:#333;
+	line-height:20px;
+	border:1px solid #AFC4C9;
+	margin-bottom:10px;
+	margin-right:20px;
+	background-color:#D5F4F3;
+	margin:0 auto;
+	
+	
+	
+}
+
+#bidlink {	
+	background-color: #FFFFFF;
+    background-image: url("/images/BID-BUTTON.png");
+    background-repeat: no-repeat;
+    border: 1px solid #FFFFFF;
+    cursor: pointer;
+    height: 25px;
+	margin-left:95px;
+    width: 57px;
 }

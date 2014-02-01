@@ -20,6 +20,7 @@
   box-shadow:0 0 18px rgba(0,0,0,0.4);
   top:60px;
   float:left;
+  z-index:10000000;
   }
 
 #facebox .content {

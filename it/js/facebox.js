@@ -190,7 +190,6 @@
 
     $('#facebox .close').click($.facebox.close)
     $('#facebox .close_image').attr('src', $.facebox.settings.closeImage)
-	
   }
 
   // getPageScroll() by quirksmode.com

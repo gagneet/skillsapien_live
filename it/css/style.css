@@ -30,7 +30,7 @@ body {	font-family: Arial, Helvetica, sans-serif; margin:0 auto;	margin: 0px; ba
 }
 
 
-.header{ margin:0px; width:999px; height:105px; position:relative;}
+.header{ margin:0 auto; width:999px; height:105px; position:relative;}
 
 .header-top{ margin: 0 0 30px; width:999px;  height:auto;  float:left;}
 
@@ -220,7 +220,7 @@ padding:0 8px 0 8px;
 #icon
 {
 	width:450px;
-	margin-left:-140px;
+	margin-left:-201px;
 }
 
 
@@ -1072,6 +1072,7 @@ css style  for calendar.php
 .tab{
     border: 1px solid #888c8e;
     height: 205px;
+	background-color:#FFFFFF;
 }
 .search-background {
 	display: none;
@@ -1109,5 +1110,13 @@ css style  for calendar.php
 		font:"Times New Roman", Times, serif;
 }
 
-
+.linkedinsubmit{
+	background-image:url(../images/submit.png);
+	width:121px;
+	height:25px;
+	border:none;
+	cursor:pointer;
+	background-color: #FFFFFF;
+	background-repeat: no-repeat;
+}
 

@@ -1,0 +1,40 @@
+		/* A few IE bug fixes */
+				
+		#theMenu { margin: 10px 0; }
+		
+		/* Some list and link styling */
+		
+		
+		/* Header links styling */
+		h3.head a { 
+		color: #fff;
+		display:block; 
+		font-size:12px;
+		background:url(../images/down.png) no-repeat; 
+		background-color:#406385;
+		background-position: 98% 50%;
+		padding:5px;
+		width:450px;
+		border:1px solid #999;
+		text-decoration:none;
+	
+		}
+		h3.head a:hover { 
+		color: #fff;
+		background: #74baff url(../images/down.png) no-repeat; 
+		background-position: 98% 50%;
+		padding:5px;
+		text-decoration:none;
+    	}
+		h3.selected a { 
+		background: #3973ac url(../images/up.png) no-repeat; 
+		background-position:98% 50%;
+		color: #fff;
+		
+		
+		}
+		h3.selected a:hover { 
+		background: #75b3f1 url(../images/up.png) no-repeat; 
+		background-position:98% 50%;
+		color: #fff;
+		}

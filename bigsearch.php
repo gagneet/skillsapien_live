@@ -15,7 +15,7 @@ background-color:#EFEFEF;
 
 table
 {
-	background-color:#BADACE;
+	background-color:#caf6ff;
 	font-family:Verdana, Geneva, sans-serif;
 	font-size:12px;
 	margin-top: 28px;
@@ -38,13 +38,13 @@ table p
 
 .color
 {
-	background-color:#dbf4eb;
+	background-color:#a3ddf3;
 	padding-left:20px;
 }
 
 </style>
 
-<script language="javascript" type="text/javascript" src="tengcalendar_files/datetimepicker.js">
+<script language="javascript" type="text/javascript" src="js/datetimepicker.js">
 </script>
 <script async src="tengcalendar_files/s_dd6e9fbb78d92ec298f6119b05509777.js" id="_bsap_js_dd6e9fbb78d92ec298f6119b05509777" type="text/javascript"></script>
 </head>
@@ -61,7 +61,7 @@ table p
 
 
 <tr>
-<td>Industry</td>
+<td>Industry *</td>
 <td>
 <select name="industry" id="industry">
 <option value="">select</option>
@@ -79,8 +79,8 @@ table p
 
 
 <tr>
-<td>Skill keywords</td>
-<td colspan="4"><input type="text" size="72"  name="skillkeyword" id="skillkeyword"/></td>
+<td>Skill keywords *</td>
+<td colspan="4"><input type="text" size="65"  name="skillkeyword" id="skillkeyword"/></td>
 </tr>
 
 
@@ -94,12 +94,12 @@ table p
 
 
 <tr>
-<td width="60px">From Date</td>
+<td width="60px">From Date *</td>
 <td >
 
 
-  <input value="" id="fdate" size="20" onClick="javascript:NewCal('fdate','ddmmyyyy',true,12)" class="scriptbreadcrumb">
-      <a href="javascript:NewCal('fdate','ddmmyyyy',true,12)"><img alt="Pick a date" src="tengcalendar_files/cal.gif" height="16" border="0" width="16"></a>
+  <input value="" id="fdate" name="fdate" size="20" onClick="javascript:NewCal('fdate','ddmmyyyy',true,12)" class="scriptbreadcrumb">
+      <a href="javascript:NewCal('fdate','ddmmyyyy',true,12)"><img alt="Pick a date" src="images/cal.gif" height="16" border="0" width="16"></a>
 
   
 </td>
@@ -107,24 +107,34 @@ table p
 <td>Ideal Rate</td>
 <td><input type="text" size="20"  name="rate" id="idealrate"/></td>
 </tr>
-
+<tr>
+<td style="line-height:5px;">&nbsp;</td>
+</tr>
 
 
 <tr>
-<td width="86px">To Date</td>
+<td width="86px">To Date *</td>
 <td>
 <input type="text" name="todate" value=""  size="20" id="todate" onClick="javascript:NewCal('todate','ddmmyyyy',true,12)">
- <a href="javascript:NewCal('todate','ddmmyyyy',true,12)"><img alt="Pick a date" src="tengcalendar_files/cal.gif" height="16" border="0" width="16"></a>
+ <a href="javascript:NewCal('todate','ddmmyyyy',true,12)"><img alt="Pick a date" src="images/cal.gif" height="16" border="0" width="16"></a>
 
 </td>
 
 <td>Max Rate</td>
 <td><input type="text" size="20"   id="maxrate" name="maxrate"/></td>
 </tr>
+
+<tr>
+<td style="line-height:5px;">&nbsp;</td>
+</tr>
+
 <tr>
 <td colspan="5"  class="button">
-<input type="submit" name="sub" style="background-image: url('./images/submit.png');width:121px;height:27px;background-color:#dbe4fb; border:none; cursor:pointer;" value="">
+<input type="submit" name="sub" style="background-image: url('./images/submit.png');width:121px;height:27px;background-color:#a3ddf3; border:none; cursor:pointer;" value="">
 </td>
+</tr>
+<tr>
+<td style="line-height:15px;">&nbsp;</td>
 </tr>
 </table>
 </td>

@@ -4,7 +4,7 @@ function funsubmit(){
 	var username =document.getElementById('username').value;
 	var emailid	 =document.getElementById('email').value;
 	var password =document.getElementById('password').value;
-	if( username ==''){
+	/*if( username ==''){
 		alert('Please Enter username');
 		return false;
 	}
@@ -15,7 +15,7 @@ function funsubmit(){
 	if( password ==''){
 		alert('Please Enter your Password');
 		return false;
-	}
+	}*/
 	
 	
 	if((document.getElementById('user1').checked)){
@@ -25,19 +25,20 @@ function funsubmit(){
 	}
 	
 	
-	document.getElementById('lusername').value =document.getElementById('username').value;
+	/*document.getElementById('lusername').value =document.getElementById('username').value;
 	document.getElementById('lemailid').value = document.getElementById('email').value;
-	document.getElementById('lpassword').value =document.getElementById('password').value;
+	document.getElementById('lpassword').value =document.getElementById('password').value;*/
 	
-	if((document.getElementById('rowcount').value)==0 && (document.getElementById('rowcount').value)!=''){
+	/*if((document.getElementById('rowcount').value)==0 && (document.getElementById('rowcount').value)!=''){
 		//alert(document.getElementById('rowcount').value);
 		//alert('valid');
 		return true;
 	}else{
+		
 		//alert(document.getElementById('rowcount').value);
 		alert('Your Email id is allready existed');
 		return false;
-	}
+	}*/
 	
 	
 	/*
@@ -76,7 +77,7 @@ xmlhttp.send();
 	
 }
 
-function usercheck(){
+/*function usercheck(){
 	//alert('hii');
 	var emailid	 =document.getElementById('email').value;
 	if (window.XMLHttpRequest){
@@ -108,7 +109,7 @@ xmlhttp.send();
 		//alert('Your Email id is allready existed');
 		return false;
 	}
-}
+}*/
 
 
 
@@ -122,9 +123,9 @@ if(isset($_GET['lusername'])){
 	//print'<pre>';
 //print_r($_GET);
 setcookie("type", $_GET['type'], time()+3600);
-setcookie("lusername", $_GET['lusername'], time()+3600);
-setcookie("lemailid", $_GET['lemailid'], time()+3600);
-setcookie("lpassword", $_GET['lpassword'], time()+3600);
+//setcookie("lusername", $_GET['lusername'], time()+3600);
+//setcookie("lemailid", $_GET['lemailid'], time()+3600);
+//setcookie("lpassword", $_GET['lpassword'], time()+3600);
 
 //$_SESSION['type']=$_GET['type'];
 //$_SESSION['lusername']=$_GET['lusername'];
@@ -549,9 +550,13 @@ try {
 				$loginpassword	=$_SESSION['lpassword'];
 				$type			=$_SESSION['type'];*/
 				
-				$loginname 		=$_COOKIE["lusername"];
-				$loginemailid	=$_COOKIE["lemailid"];
-				$loginpassword	=$_COOKIE["lpassword"];
+				//$loginname 		=$_COOKIE["lusername"];
+				//$loginemailid	=$_COOKIE["lemailid"];
+				//$loginpassword	=$_COOKIE["lpassword"];
+				
+				$loginname 		="";
+				$loginemailid	="";
+				$loginpassword	="";
 				$type			=$_COOKIE["type"];
 				
 				//echo $loginname;
@@ -561,9 +566,9 @@ try {
 				
 				
 				setcookie("type", "", time()-3600);
-				setcookie("lusername", "", time()-3600);
-				setcookie("lemailid", "", time()-3600);
-				setcookie("lpassword", "", time()-3600);
+				//setcookie("lusername", "", time()-3600);
+				//setcookie("lemailid", "", time()-3600);
+				//setcookie("lpassword", "", time()-3600);
 				
 				
 				$country = $locationAry[count($locationAry)-1];
@@ -598,7 +603,7 @@ try {
 			//print_r($_SESSION);exit;
 			
 			
-			
+			// update user details with linkedin login details 
 			if($s->is_set('USER_ID') || $s->is_set('R_USER_ID')){
 				
 				$userType =$s->value('USER_TYPE');
@@ -717,7 +722,8 @@ try {
 						$s->set('USER_LOGIN_ID',base64_encode($fName));
 						
 						echo '<script type="text/javascript">';
-						echo 'window.location="../candidate-dashboard.php"';
+						//echo 'window.location="../candidate-dashboard.php"';
+						echo 'window.location="../linkedinupdate.php"';
 						echo '</script>';
 						
 					}elseif($type =='R'){
@@ -727,7 +733,8 @@ try {
 						$s->set('R_USER_LOGIN_ID',base64_encode($fName));
 						
 						echo '<script type="text/javascript">';
-						echo 'window.location="../recruiters-dashboard.php"';
+						//echo 'window.location="../recruiters-dashboard.php"';
+						echo 'window.location="../linkedinupdate.php"';
 						echo '</script>';
 					}
 			}

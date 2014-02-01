@@ -123,7 +123,8 @@
 				  <tr>
 					<td width="120" height="35" align="right" valign="middle" class="required">Email* </td>
 					<td height="35" valign="middle"><div class="accont-search">
-						<input type="text" name="email" id="email" class="input3"    onblur="usercheck()"/>
+<!--						<input type="text" name="email" id="email" class="input3"    onblur="usercheck()"/>
+-->                        	<input type="text" name="email" id="email" class="input3"    />
 					  </div> <div id="error3" class="error"   style="display:none">Please enter Email Address.</div>
                       <div id="error3_1" class="error"   style="display:none">Please enter valid Email Address.</div></td>
 				  </tr>

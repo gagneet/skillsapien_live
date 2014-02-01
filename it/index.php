@@ -218,7 +218,7 @@ document.onmousemove=positiontip
    ?>
    
   <div class="canten">
-<link rel="stylesheet" href="cssimg/global.css">
+<link rel="stylesheet" href="css/sliderstyle.css">
 	
 	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
 	<script src="http://gsgd.co.uk/sandbox/jquery/easing/jquery.easing.1.3.js"></script>
@@ -249,7 +249,7 @@ document.onmousemove=positiontip
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
 	<script src="http://gsgd.co.uk/sandbox/jquery/easing/jquery.easing.1.3.js"></script>
-	<script src="jsimg/slides.min.jquery.js"></script>
+	<script src="js/slider_jquery.js"></script>
 	<script>
 		$(function(){
 			$('#slides').slides({

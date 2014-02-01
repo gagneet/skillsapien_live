@@ -134,7 +134,7 @@ function goyear(){
 <body>
 <div id="outer" >
 <div class="men2">
-<div class="header">
+<div class="header" style="margin-left:55px;">
 
 
 
@@ -195,6 +195,7 @@ function goyear(){
 
 <div id='menu1' style="width:900px; margin-left:50px; margin-top:10px;">
 
+		<span  class="calendermenu"  ><a href="hourlycalendar.php" style="font-size:14px; font-weight:bold; color:green; text-decoration:none;">Hourly Calendar</a></span>
 		<span  class="calendermenu" style="font-size:14px; font-weight:bold; color:green;" onClick="goday()">DAY</span>
         <span class="calendermenu" style="font-size:14px; font-weight:bold; color:green;" onClick="goweek()">WEEK</span>
         <span class="calendermenu" style="font-size:14px; font-weight:bold; color:green;" onClick="gomonth()">MONTH</span>

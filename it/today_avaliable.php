@@ -213,7 +213,7 @@ function validateDate(){
 
 if($_GET['canditIt'] !='' && mysql_num_rows($queryResult) ==0){
 		echo '<br><br><br>';
-		echo '<center><h3 style="color:#063;margin-bottom:10px;">Unavaliable Time: NA</h3></center>';
+		echo '<center><h3 style="color:#063;margin-bottom:10px;">Unavaliable Time on '.$_GET['date'].': NA</h3></center>';
 		echo '<br><br><br>';
 	
 }
@@ -222,17 +222,21 @@ if(mysql_num_rows($queryResult) !=0){
 	
 	
 		echo '<table align="center" id="avaliableTime" name="avaliableTime" border="0" cellpadding="2" width="500px" cellspacing="10" style="background-color:#BADACE; font-size:13px;">';
-		echo '<caption><h3 style="color:#063;margin-bottom:10px;">Unavaliable Time</h3></caption>';
-		echo '<tr> <td align="center"> DATE</td><td align="center">From</td><td align="center">To</td><td align="center">Delete</td>';
+		echo '<caption><h3 style="color:#063;margin-bottom:10px;">Unavaliable Time on '.$_GET['date'].'</h3></caption>';
+		echo '<tr> <td align="center"> DATE</td><td align="center">From</td><td align="center">To</td>';
+		if($s->is_set('USER_ID')){
+		echo '<td align="center">Delete</td>';
+		}
 }
 while ($row =mysql_fetch_assoc($queryResult)){
 echo '<tr align="center">
 			<td>'.$row['date'].'</td>
 			<td>'.$row['from_time'].'</td>
-			<td>'.$row['to_time'].'</td>
-			<td><a onclick="deleteC('.$row['id'].','."'".$_GET['date']."'".')" style="cursor:pointer;">Delete</a></td>
-		</tr>
-';	
+			<td>'.$row['to_time'].'</td>';
+			if($s->is_set('USER_ID')){
+			echo '<td><a onclick="deleteC('.$row['id'].','."'".$_GET['date']."'".')" style="cursor:pointer;">Delete</a></td>';
+			}
+		echo '</tr>';	
 }
 echo "</table>";
 
@@ -251,7 +255,7 @@ if($s->is_set('USER_ID')){
 
 <table title="" align="center" width="500px"  style="background-color:#dbf4eb; font-size:13px; color:#333;">
 
-<caption><h3 style="color:#063; margin-bottom:10px;">Add Unavailable Time</h3></caption>
+<caption><h3 style="color:#063; margin-bottom:10px;">Add Unavailable Time on <?php echo $_GET['date']; ?></h3></caption>
 <tr>
 <td colspan="2" style="line-height:15px;">&nbsp;</td>
 </tr>
